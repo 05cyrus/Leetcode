@@ -1,0 +1,14 @@
+  // Write your code here.
+    vector<vector<long long int>> result;
+    for(int i=1;i<=n;i++){
+        long long ans=1;
+        vector<long long int> ansRow;
+        ansRow.push_back(1);
+        for(int col=1;col<i;col++){
+          ans=ans*(i-col);
+          ans=ans/col;
+          ansRow.push_back(ans);
+      }
+    result.push_back(ansRow); 
+    }
+    return result;  
