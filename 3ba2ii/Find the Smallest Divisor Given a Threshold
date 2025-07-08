@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool possible(vector<int>& nums, int mid, int threshold){
+        int sum=0;
+        for(int i:nums){
+            sum+=(i+mid-1)/mid;
+        }
+        if(sum<=threshold) return true;
+        else return false;
+    }
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        int n=nums.size();
+        int left=1;
+        int right=INT_MAX;
+        int ans=-1;
+        while(left<=right){
+            int mid=((long long)left+right)/2;
+            if(possible(nums,mid,threshold)){
+                right=mid-1;
+                ans=mid;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        return ans;
+    }
+};
