@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool possible(vector<int>& weights, int mid, int days){
+        int sum=0;
+        int day=1;
+        for(int i:weights){
+            sum+=i;
+            if(mid-sum<0){
+                day++;
+                sum=i;
+            }
+        }
+        if(day<=days) return true;
+        else return false;
+    }
+    int shipWithinDays(vector<int>& weights, int days) {
+        int n=weights.size();
+        int left=*max_element(weights.begin(),weights.end());
+        int right=accumulate(weights.begin(), weights.end(), 0);
+        int ans=-1;
+        while(left<=right){
+            int mid=((long long)left+right)/2;
+            if(possible(weights,mid,days)){
+                right=mid-1;
+                ans=mid;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        return ans;
+    }
+};
