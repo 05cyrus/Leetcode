@@ -1,0 +1,37 @@
+bool possible(vector<int> arr,int n,int m,int mid){
+    int sum=0;
+    int cnt=1;
+    for(int i=0;i<n;i++){
+        if((arr[i]+sum)<=mid){
+            sum+=arr[i];
+        }
+        else{
+            cnt++;
+            sum=arr[i];
+        }
+        if(cnt>m) return false;
+    }
+    return cnt<=m;
+}
+
+
+int findPages(vector<int>& arr, int n, int m) {
+    // Write your code here.
+    if(m>n) return -1;
+    int left=*max_element(arr.begin(),arr.end());
+    int right=accumulate(arr.begin(),arr.end(),0);
+    int ans=right;
+    while(left<=right){
+        int mid=(left+right)/2;
+        if(possible(arr,n,m,mid)){
+            right=mid-1;
+            ans=mid;
+        }
+        else{
+            left=mid+1;
+        }
+    }
+    return ans;
+
+
+}
